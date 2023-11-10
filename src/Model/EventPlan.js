@@ -1,6 +1,6 @@
 import { validateVisitDateInput } from "../utils/validateVisitDate.js";
 
-class Model {
+class EventPlan {
   #visitDate;
 
   setVisitDate(date) {
@@ -9,4 +9,4 @@ class Model {
   }
 }
 
-export default Model;
+export default EventPlan;

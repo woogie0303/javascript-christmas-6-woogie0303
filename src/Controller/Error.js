@@ -11,5 +11,9 @@ const ERROR_HANDLING = {
     errorView.printError(message);
     InputView.readDate(eventPlan);
   },
+  "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.": (eventPlan, message) => {
+    errorView.printError(message);
+    InputView.readMenu(eventPlan);
+  },
 };
 export { ERROR, ERROR_HANDLING };

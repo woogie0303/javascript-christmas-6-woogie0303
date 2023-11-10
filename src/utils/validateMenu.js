@@ -1,5 +1,5 @@
-import { ERROR } from "../Controller/Error";
-import { christmasMenu, menuCategory } from "../Model/EventData";
+import { ERROR } from "../Controller/Error.js";
+import { christmasMenu, menuCategory } from "../Model/EventData.js";
 
 const validateMenu = {
   checkEqaulMenu(orderMenu, menuName) {

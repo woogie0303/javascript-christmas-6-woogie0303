@@ -1,7 +1,6 @@
 import EventPlan from "./Model/EventPlan.js";
 import OutputView from "./View/OutputView.js";
 import InputView from "./View/InputView.js";
-import eventPlanController from "./Controller/EventPlanController.js";
 
 class App {
   async run() {

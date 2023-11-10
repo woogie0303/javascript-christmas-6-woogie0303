@@ -1,9 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
 
-let OutputView;
-
-export default OutputView = {
+const OutputView = {
   printMessage(message) {
     Console.print(message);
   },
 };
+
+export default OutputView;

@@ -1,4 +1,5 @@
 import InputView from "../View/InputView.js";
+import OutputView from "../View/OutputView.js";
 import { ERROR_HANDLING } from "./Error.js";
 
 class EventPlanController {
@@ -14,14 +15,15 @@ class EventPlanController {
   ordermenuHandler(eventPlan, orderMenuInput) {
     try {
       eventPlan.setOrderMenu(orderMenuInput);
-      this.beforeChristmasEventHandler(eventPlanController);
+      this.beforeChristmasEventHandler(eventPlan);
     } catch (err) {
       ERROR_HANDLING[err.message](eventPlan, err.message);
     }
   }
 
   beforeChristmasEventHandler(eventPlan) {
-    const orderMenu = eventPlan.addTotalPrice();
+    const [orderMenu, totalPrice] = eventPlan.addTotalPrice();
+    OutputView.printBeforeChristmasEvent(orderMenu, totalPrice);
   }
 }
 

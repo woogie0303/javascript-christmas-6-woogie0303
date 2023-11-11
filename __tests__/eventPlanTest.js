@@ -12,9 +12,9 @@ describe("evnentPlan 테스트", () => {
 
     // when
     eventPlan.setOrderMenu(orderMenuInput);
-    const orderMenu = eventPlan.addTotalPrice();
+    const [orderMenu, totalPrice] = eventPlan.addTotalPrice();
 
     // then
-    expect(orderMenu.menuTotalPrice).toEqual(60500);
+    expect(totalPrice).toEqual(60500);
   });
 });

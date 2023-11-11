@@ -31,9 +31,7 @@ class EventPlan {
       totalPrice += christmasMenu[menuName] * this.#orderMenu[menuName];
     });
 
-    this.#orderMenu["menuTotalPrice"] = totalPrice;
-
-    return this.#orderMenu;
+    return [this.#orderMenu, totalPrice];
   }
 }
 

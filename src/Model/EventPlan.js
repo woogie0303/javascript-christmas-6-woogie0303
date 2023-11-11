@@ -1,6 +1,6 @@
 import { validateVisitDateInput } from "../utils/validateVisitDate.js";
 import { validateMenuInput, checkEventCaution } from "../utils/validateMenu.js";
-import { christmasMenu } from "./EventData.js";
+import { christmasMenu, menuCategory } from "./EventData.js";
 
 class EventPlan {
   #visitDate;
@@ -12,7 +12,7 @@ class EventPlan {
 
   setVisitDate(date) {
     validateVisitDateInput(date);
-    this.#visitDate = date;
+    this.#visitDate = Number(date);
   }
 
   setOrderMenu(menuInput) {
@@ -36,6 +36,76 @@ class EventPlan {
     });
 
     return totalPrice;
+  }
+
+  applyEvent() {
+    let benefit = {};
+    if (this.addTotalPrice() >= 10000) {
+      benefit = this.categorizeBenefit();
+    }
+
+    return benefit;
+  }
+
+  categorizeBenefit() {
+    const giftEvent = this.checkGiftEvent();
+    const christmasDayDiscount = this.checkChrisMasDayDiscount();
+    const dayDiscount = this.checkDayDiscount();
+    const specialDayDiscount = this.checkSpecialDayDisCount();
+    const benefit = Object.assign({}, giftEvent, christmasDayDiscount, dayDiscount, specialDayDiscount);
+
+    return benefit;
+  }
+
+  checkGiftEvent() {
+    const totalPrice = this.addTotalPrice();
+
+    if (totalPrice >= 120000) {
+      return { "증정 이벤트": 25000 };
+    }
+  }
+
+  checkChrisMasDayDiscount() {
+    if (this.#visitDate >= 1 && this.#visitDate <= 25) {
+      const christmasDayDiscountPrice = 1000 + (this.#visitDate - 1) * 100;
+
+      return { "크리스마스 디데이 할인": christmasDayDiscountPrice };
+    }
+  }
+
+  checkDayDiscount() {
+    const day = new Date(`2023-12-${this.#visitDate}`).getDay();
+
+    if (day === 5 || day === 6) {
+      return this.discountMenu("weekend");
+    }
+
+    if (day >= 0 && day <= 4) {
+      return this.discountMenu("weekday");
+    }
+  }
+
+  checkSpecialDayDisCount() {
+    const day = new Date(`2023-12-${this.#visitDate}`).getDay();
+
+    if (day === 0 || this.#visitDate === 25) {
+      return { "특별 할인": 1000 };
+    }
+  }
+
+  discountMenu(type) {
+    let totalDishes = 0;
+    const menuType = type === "weekend" ? menuCategory.main : menuCategory.dessert;
+    const discountType = type === "weekend" ? "주말 할인" : "평일 할인";
+
+    Object.keys(this.#orderMenu).forEach((menuName) => {
+      menuType.includes(menuName) ? (totalDishes += this.#orderMenu[menuName]) : "";
+    });
+
+    if (totalDishes !== 0) {
+      const totalDisCount = totalDishes * 2023;
+      return { [discountType]: totalDisCount };
+    }
   }
 }
 

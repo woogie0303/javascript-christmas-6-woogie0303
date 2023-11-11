@@ -6,7 +6,7 @@ class App {
   async run() {
     OutputView.printMessage("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
     const eventPlan = new EventPlan();
-    InputView.readDate(eventPlan);
+    await InputView.readDate(eventPlan);
   }
 }
 

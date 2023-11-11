@@ -1,5 +1,6 @@
 import { validateVisitDateInput } from "../utils/validateVisitDate.js";
 import { validateMenuInput, checkEventCaution } from "../utils/validateMenu.js";
+import { christmasMenu } from "./EventData.js";
 
 class EventPlan {
   #visitDate;
@@ -21,6 +22,18 @@ class EventPlan {
     checkEventCaution(orderMenu);
 
     this.#orderMenu = orderMenu;
+  }
+
+  addTotalPrice() {
+    let totalPrice = 0;
+
+    Object.keys(this.#orderMenu).forEach((menuName) => {
+      totalPrice += christmasMenu[menuName] * this.#orderMenu[menuName];
+    });
+
+    this.#orderMenu["menuTotalPrice"] = totalPrice;
+
+    return this.#orderMenu;
   }
 }
 

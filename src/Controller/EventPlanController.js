@@ -14,9 +14,14 @@ class EventPlanController {
   ordermenuHandler(eventPlan, orderMenuInput) {
     try {
       eventPlan.setOrderMenu(orderMenuInput);
+      this.beforeChristmasEventHandler(eventPlanController);
     } catch (err) {
       ERROR_HANDLING[err.message](eventPlan, err.message);
     }
+  }
+
+  beforeChristmasEventHandler(eventPlan) {
+    const orderMenu = eventPlan.addTotalPrice();
   }
 }
 

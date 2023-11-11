@@ -12,7 +12,7 @@ describe("evnentPlan 테스트", () => {
 
     // when
     eventPlan.setOrderMenu(orderMenuInput);
-    const [orderMenu, totalPrice] = eventPlan.addTotalPrice();
+    const totalPrice = eventPlan.addTotalPrice();
 
     // then
     expect(totalPrice).toEqual(60500);

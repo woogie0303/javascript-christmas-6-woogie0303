@@ -6,6 +6,10 @@ class EventPlan {
   #visitDate;
   #orderMenu;
 
+  get getOrderMenu() {
+    return this.#orderMenu;
+  }
+
   setVisitDate(date) {
     validateVisitDateInput(date);
     this.#visitDate = date;
@@ -31,7 +35,7 @@ class EventPlan {
       totalPrice += christmasMenu[menuName] * this.#orderMenu[menuName];
     });
 
-    return [this.#orderMenu, totalPrice];
+    return totalPrice;
   }
 }
 

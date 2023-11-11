@@ -8,6 +8,7 @@ class EventPlanController {
       eventPlan.setVisitDate(visitDateInput);
       InputView.readMenu(eventPlan);
     } catch (err) {
+      console.log(err);
       ERROR_HANDLING[err.message](eventPlan, err.message);
     }
   }
@@ -17,13 +18,14 @@ class EventPlanController {
       eventPlan.setOrderMenu(orderMenuInput);
       this.beforeChristmasEventHandler(eventPlan);
     } catch (err) {
+      console.log(err);
       ERROR_HANDLING[err.message](eventPlan, err.message);
     }
   }
 
   beforeChristmasEventHandler(eventPlan) {
-    const [orderMenu, totalPrice] = eventPlan.addTotalPrice();
-    OutputView.printBeforeChristmasEvent(orderMenu, totalPrice);
+    const totalPrice = eventPlan.addTotalPrice();
+    OutputView.printBeforeChristmasEvent(eventPlan.getOrderMenu, totalPrice);
   }
 }
 

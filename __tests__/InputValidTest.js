@@ -54,7 +54,7 @@ describe("인풋 유효성 검사", () => {
 
   test("메뉴의 개수가 숫자가 아닌 값을 입력하면 예외 처리한다.", () => {
     expect(() => {
-      eventPlan.setOrderMenu("티본스테이크-a,타파스-21");
+      eventPlan.setOrderMenu("티본스테이크-a,타파스-10");
     }).toThrow("[ERROR]");
   });
 

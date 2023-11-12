@@ -121,9 +121,24 @@ describe("할인 후 테스트", () => {
     eventPlan.setOrderMenu("바비큐립-2,해산물파스타-3");
 
     // when
-    const benefitPrice = eventPlan.caculateTotalBenefitPrice();
+    const benefitPrice = eventPlan.sortAfterChristmasDiscount();
 
     // then
-    expect(benefitPrice).toEqual(36115);
+    expect(benefitPrice.totalBenefitPrice).toEqual(36115);
+  });
+
+  test.each([
+    { visitDate: "1", orderMenu: "바비큐립-2,해산물파스타-3", expectValue: 201885 },
+    { visitDate: "1", orderMenu: "해산물파스타-2,초코케이크-1", expectValue: 79954 },
+  ])("알맞은 할인 후 금액을 반환한다.", (input) => {
+    // given
+    eventPlan.setVisitDate(input.visitDate);
+    eventPlan.setOrderMenu(input.orderMenu);
+
+    // when
+    const benefitPrice = eventPlan.sortAfterChristmasDiscount();
+
+    // then
+    expect(benefitPrice.discountTotalPrice).toEqual(input.expectValue);
   });
 });

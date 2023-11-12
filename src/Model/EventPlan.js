@@ -46,6 +46,20 @@ class EventPlan {
 
     return benefit;
   }
+  caculateTotalBenefitPrice() {
+    const benefit = this.applyEvent();
+    let totalBenfitPrice = 0;
+
+    if (Object.keys(benefit).length === 0) {
+      return totalBenfitPrice;
+    }
+
+    Object.keys(benefit).forEach((eventName) => {
+      totalBenfitPrice += benefit[eventName];
+    });
+
+    return totalBenfitPrice;
+  }
 
   categorizeBenefit() {
     const giftEvent = this.checkGiftEvent();

@@ -46,7 +46,15 @@ class EventPlan {
 
     return benefit;
   }
-  caculateTotalBenefitPrice() {
+
+  sortAfterChristmasDiscount() {
+    const totalBenefitPrice = this.calculateTotalBenefitPrice();
+    const discountTotalPrice = this.calculateDiscountTotalPrice(totalBenefitPrice);
+
+    return { totalBenefitPrice, discountTotalPrice };
+  }
+
+  calculateTotalBenefitPrice() {
     const benefit = this.applyEvent();
     let totalBenfitPrice = 0;
 
@@ -59,6 +67,17 @@ class EventPlan {
     });
 
     return totalBenfitPrice;
+  }
+
+  calculateDiscountTotalPrice(totalBenefitPrice) {
+    const benefit = this.applyEvent();
+    const discountTotalPrice = this.addTotalPrice() - totalBenefitPrice;
+
+    if (benefit.hasOwnProperty("증정 이벤트")) {
+      return discountTotalPrice + benefit["증정 이벤트"];
+    }
+
+    return discountTotalPrice;
   }
 
   categorizeBenefit() {

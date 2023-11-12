@@ -1,6 +1,6 @@
 import EventPlan from "../src/Model/EventPlan";
 
-describe("evnentPlan 테스트", () => {
+describe("할인 테스트", () => {
   let eventPlan;
   beforeEach(() => {
     eventPlan = new EventPlan();
@@ -106,5 +106,24 @@ describe("evnentPlan 테스트", () => {
 
     //then
     expect(benefit).toEqual({});
+  });
+});
+
+describe("할인 후 테스트", () => {
+  let eventPlan;
+  beforeEach(() => {
+    eventPlan = new EventPlan();
+  });
+
+  test("알맞은 총혜택 금액을 반환한다.", () => {
+    // given
+    eventPlan.setVisitDate("1");
+    eventPlan.setOrderMenu("바비큐립-2,해산물파스타-3");
+
+    // when
+    const benefitPrice = eventPlan.caculateTotalBenefitPrice();
+
+    // then
+    expect(benefitPrice).toEqual(36115);
   });
 });

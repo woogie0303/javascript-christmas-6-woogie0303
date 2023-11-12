@@ -50,8 +50,9 @@ class EventPlan {
   sortAfterChristmasDiscount() {
     const totalBenefitPrice = this.calculateTotalBenefitPrice();
     const discountTotalPrice = this.calculateDiscountTotalPrice(totalBenefitPrice);
+    const eventBadge = this.checkEventBadge(totalBenefitPrice);
 
-    return { totalBenefitPrice, discountTotalPrice };
+    return { totalBenefitPrice, discountTotalPrice, eventBadge };
   }
 
   calculateTotalBenefitPrice() {
@@ -78,6 +79,18 @@ class EventPlan {
     }
 
     return discountTotalPrice;
+  }
+
+  checkEventBadge(totalBenefitPrice) {
+    if (totalBenefitPrice >= 20000) {
+      return "산타";
+    }
+    if (totalBenefitPrice >= 10000) {
+      return "트리";
+    }
+    if (totalBenefitPrice >= 5000) {
+      return "별";
+    }
   }
 
   categorizeBenefit() {

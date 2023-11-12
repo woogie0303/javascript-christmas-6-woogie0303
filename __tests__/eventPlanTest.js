@@ -121,10 +121,10 @@ describe("할인 후 테스트", () => {
     eventPlan.setOrderMenu("바비큐립-2,해산물파스타-3");
 
     // when
-    const benefitPrice = eventPlan.sortAfterChristmasDiscount();
+    const afterDiscount = eventPlan.sortAfterChristmasDiscount();
 
     // then
-    expect(benefitPrice.totalBenefitPrice).toEqual(36115);
+    expect(afterDiscount.totalBenefitPrice).toEqual(36115);
   });
 
   test.each([
@@ -136,9 +136,25 @@ describe("할인 후 테스트", () => {
     eventPlan.setOrderMenu(input.orderMenu);
 
     // when
-    const benefitPrice = eventPlan.sortAfterChristmasDiscount();
+    const afterDiscount = eventPlan.sortAfterChristmasDiscount();
 
     // then
-    expect(benefitPrice.discountTotalPrice).toEqual(input.expectValue);
+    expect(afterDiscount.discountTotalPrice).toEqual(input.expectValue);
+  });
+
+  test.each([
+    { visitDate: "1", orderMenu: "해산물파스타-2,초코케이크-1,바비큐립-2", expectValue: "산타" },
+    { visitDate: "25", orderMenu: "초코케이크-3,해산물파스타-1", expectValue: "트리" },
+    { visitDate: "1", orderMenu: "해산물파스타-2", expectValue: "별" },
+  ])("혜택 금액에 따른 산타 배지를 부여한다.", (input) => {
+    // given
+    eventPlan.setVisitDate(input.visitDate);
+    eventPlan.setOrderMenu(input.orderMenu);
+
+    // when
+    const afterDiscount = eventPlan.sortAfterChristmasDiscount();
+
+    // then
+    expect(afterDiscount.eventBadge).toEqual(input.expectValue);
   });
 });

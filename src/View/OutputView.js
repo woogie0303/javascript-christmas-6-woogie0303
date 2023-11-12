@@ -16,6 +16,21 @@ const OutputView = {
     this.printMessage("\n<할인 전 총주문 금액>");
     this.printMessage(`${totalPrice.toLocaleString()}`);
   },
+
+  printChristmasEvent(benefit) {
+    this.printMessage("\n<증정 메뉴>");
+    this.printMessage(`${benefit.hasOwnProperty("증정 이벤트") ? "샴페인 1개" : "없음"}`);
+    this.printMessage("\n<혜택 내역>");
+
+    if (Object.keys(benefit).length === 0) {
+      this.printMessage("없음");
+      return;
+    }
+
+    Object.keys(benefit).forEach((eventName) => {
+      this.printMessage(`${eventName}: -${benefit[eventName].toLocaleString()}원`);
+    });
+  },
 };
 
 export default OutputView;

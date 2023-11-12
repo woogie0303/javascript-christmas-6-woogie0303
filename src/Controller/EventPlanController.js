@@ -15,20 +15,22 @@ class EventPlanController {
   ordermenuHandler(eventPlan, orderMenuInput) {
     try {
       eventPlan.setOrderMenu(orderMenuInput);
-      this.beforeChristmasEventHandler(eventPlan);
+      this.beforeChristmasDiscountHandler(eventPlan);
     } catch (err) {
       ERROR_HANDLING[err.message](eventPlan, err.message);
     }
   }
 
-  beforeChristmasEventHandler(eventPlan) {
+  beforeChristmasDiscountHandler(eventPlan) {
     const totalPrice = eventPlan.addTotalPrice();
     OutputView.printBeforeChristmasEvent(eventPlan.getOrderMenu, totalPrice);
-    this.chrismasEventHandler(eventPlan);
+    this.chrismasDiscountHandler(eventPlan);
   }
 
-  chrismasEventHandler(eventPlan) {
-    eventPlan.applyEvent();
+  chrismasDiscountHandler(eventPlan) {
+    const benefit = eventPlan.applyEvent();
+
+    OutputView.printChristmasEvent(benefit);
   }
 }
 

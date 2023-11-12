@@ -31,6 +31,15 @@ const OutputView = {
       this.printMessage(`${eventName}: -${benefit[eventName].toLocaleString()}원`);
     });
   },
+
+  printAfterChristmasDiscount(afterDiscount) {
+    this.printMessage("\n<총혜택 금액>");
+    this.printMessage(`${afterDiscount.totalBenefitPrice === 0 ? "0" : Number(-afterDiscount.totalBenefitPrice).toLocaleString()}원`);
+    this.printMessage("\n<할인 후 예상 결제 금액>");
+    this.printMessage(`${afterDiscount.discountTotalPrice.toLocaleString()}원`);
+    this.printMessage("\n<12월 이벤트 배지>");
+    this.printMessage(`${afterDiscount.eventBadge ? afterDiscount.eventBadge : "없음"}`);
+  },
 };
 
 export default OutputView;

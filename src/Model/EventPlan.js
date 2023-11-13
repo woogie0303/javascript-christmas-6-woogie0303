@@ -20,7 +20,9 @@ class EventPlan {
     const orderMenu = {};
 
     menu.forEach((menuItem) => {
-      validateMenuInput(menuItem, orderMenu);
+      const menuItemObj = validateMenuInput(menuItem, orderMenu);
+
+      Object.assign(orderMenu, menuItemObj);
     });
 
     checkEventCaution(orderMenu);

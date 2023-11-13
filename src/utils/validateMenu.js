@@ -26,6 +26,12 @@ const validateMenu = {
     }
   },
 
+  checkAmountRange(menuAmount) {
+    if (Number(menuAmount) < 1) {
+      throw new Error(ERROR.ORDER_MENU_ERROR);
+    }
+  },
+
   checkAmountLimit(orderMenu) {
     let total = 0;
     Object.values(orderMenu).forEach((amount) => {
@@ -55,9 +61,10 @@ function validateMenuInput(menuItem, orderMenu) {
   validateMenu.checkEqaulMenu(orderMenu, name);
   validateMenu.checkExistMenu(name);
   validateMenu.checkAmountNum(amount);
+  validateMenu.checkAmountRange(amount);
   validateMenu.checkAmountIsInteger(amount);
 
-  orderMenu[name] = Number(amount);
+  return { [name]: Number(amount) };
 }
 
 function checkEventCaution(orderMenu) {

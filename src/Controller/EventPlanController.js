@@ -24,7 +24,7 @@ class EventPlanController {
   beforeChristmasDiscountHandler(eventPlan) {
     const totalPrice = eventPlan.addTotalPrice();
 
-    OutputView.printBeforeChristmasDiscount(eventPlan.getOrderMenu, totalPrice);
+    OutputView.printBeforeChristmasDiscount(eventPlan.getOrderMenu, eventPlan.getVisitDate, totalPrice);
     this.christmasDiscountHandler(eventPlan);
   }
 

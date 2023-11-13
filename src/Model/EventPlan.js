@@ -10,6 +10,10 @@ class EventPlan {
     return this.#orderMenu;
   }
 
+  get getVisitDate() {
+    return this.#visitDate;
+  }
+
   setVisitDate(date) {
     validateVisitDateInput(date);
     this.#visitDate = Number(date);

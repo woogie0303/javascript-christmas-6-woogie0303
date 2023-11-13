@@ -58,6 +58,12 @@ describe("인풋 유효성 검사", () => {
     }).toThrow("[ERROR]");
   });
 
+  test("메뉴의 개수가 0이면 예외 처리한다.", () => {
+    expect(() => {
+      eventPlan.setOrderMenu("티본스테이크-0,타파스-10");
+    }).toThrow("[ERROR]");
+  });
+
   test("메뉴의 개수가 정수가 아니면 예외 처리한다.", () => {
     expect(() => {
       eventPlan.setOrderMenu("티본스테이크-1.2,타파스-21");

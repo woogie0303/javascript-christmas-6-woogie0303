@@ -97,3 +97,109 @@
     ✅ 2만 원 이상이면 산타
 
   - 이벤트 배지가 없으면 `없음`을 출력한다
+
+# </br>**기능목록**
+
+## 💾 **Model**
+
+### **EventData**
+
+- 크리스마스 이벤트에 필요한 데이터 분류
+
+### **EventPlan**
+
+#### **`method`**
+
+- `getOrderMenu`: ordermenu 데이터 반환
+
+- `getVisitDate`: visitDate 데이터 반환
+
+- `setVisitDate`: visitDate 설정
+
+- `setOrderMenu`: orderMenu 설정
+
+- `addTotalPrice`: 할인 전 총주문 금액을 반환해 주는 메서드
+
+- `applyEvent`: 해당하는 이벤트 목록 객체를 반환해 주는 메서드
+
+- `sortAfterChristmasDiscount`: 할인된 후 아웃풋에 필요한 정보를 반환해 주는 메서드
+
+- `calculateTotalBenefitPrice`: 총혜택 금액을 반환해 주는 메서드
+
+- `calculateDiscountTotalPrice`: 할인된 후 총금액을 반환해 주는 메서드
+
+- `checkEventBadge`: 이벤트 뱃지를 반환해 주는 메서드
+
+- `categorizeBenefit`: 받은 혜택들을 분류해 준 다음 반환하는 메서드
+
+- `checkGiftEvent`: 증정 이벤트에 해당하는지 검사해 주는 메서드
+
+- `checkChrisMasDayDiscount`: 크리스마스 디데이 할인에 해당하는지 검사해 주는 메서드
+
+- `checkDayDiscount`: 평일, 주말에 따라 해당하는 할인을 검사해 주는 메서드
+
+- `checkSpecialDayDisCount`: 특별 이벤트에 해당하는지 검사해 주는 메서드
+
+- `discountMenu`: 평일 할인 또는 주말 할인 금액을 계산해 주는 메서드
+
+## 📺 **View**
+
+### **ErrorView**
+
+#### **`method`**
+
+- printError: 에러 메세지를 출력해 주는 메서드
+
+### **InputView**
+
+#### **`method`**
+
+- `readDate`: 방문 날짜를 입력받는 메서드
+
+- `readMenu`: 주문 메뉴를 입력받는 메서드
+
+### **OutputView**
+
+#### **`method`**
+
+- `printMessage`: 메세지를 출력해 주는 메서드
+
+- `printBeforeChristmasDiscount`: 이벤트 받기 전 상황을 출력해 주는 메서드
+
+- `printChristmasDiscount`: 이벤트 받을 떄 상황을 출력해 주는 메서드
+
+- `printAfterChristmasDiscount`: 이벤트 받은 후 상호아을 출력해 주는 메더스
+
+## 🎮 **Controller**
+
+### **Error**
+
+- 에러를 관리 해주는 객체
+
+### **EventPlanController**
+
+#### **`method`**
+
+- `visitDateHandler`: 방문 날짜를 관리해 주는 메서드
+
+- `ordermenuHandler`: 주문 메뉴를 관리해 주는 메서드
+
+- `beforeChristmasDiscountHandler`: 이벤트 받기 전 상황을 관리해 주는 메서드
+
+- `christmasDiscountHandler`: 이벤트 받을 때 상황을 관리해 주는 메서드
+
+- `afterChristmasDiscountHandler`: 이벤트 받은 후 상황을 관리해 주는 메서드
+
+## **⚙️ utils**
+
+### **Constant**
+
+- 상수 관리
+
+### **validateMenu**
+
+- 메뉴 인풋 예외 처리
+
+### **validateVisitDate**
+
+- 방문 날짜 예외 처리

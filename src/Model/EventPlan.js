@@ -1,6 +1,7 @@
 import { validateVisitDateInput } from "../utils/validateVisitDate.js";
 import { validateMenuInput, checkEventCaution } from "../utils/validateMenu.js";
 import { christmasMenu, menuCategory } from "./EventData.js";
+import { CHRISTMAS_EVENT, EVENT_PRICE } from "../utils/Constant.js";
 
 class EventPlan {
   #visitDate;
@@ -46,7 +47,7 @@ class EventPlan {
 
   applyEvent() {
     let benefit = {};
-    if (this.addTotalPrice() >= 10000) {
+    if (this.addTotalPrice() >= EVENT_PRICE.minimumOrderPrice) {
       benefit = this.categorizeBenefit();
     }
 
@@ -88,13 +89,13 @@ class EventPlan {
   }
 
   checkEventBadge(totalBenefitPrice) {
-    if (totalBenefitPrice >= 20000) {
+    if (totalBenefitPrice >= EVENT_PRICE.badgeSantaPrice) {
       return "산타";
     }
-    if (totalBenefitPrice >= 10000) {
+    if (totalBenefitPrice >= EVENT_PRICE.badgeTreePrice) {
       return "트리";
     }
-    if (totalBenefitPrice >= 5000) {
+    if (totalBenefitPrice >= EVENT_PRICE.badgeStarPrice) {
       return "별";
     }
   }
@@ -112,14 +113,14 @@ class EventPlan {
   checkGiftEvent() {
     const totalPrice = this.addTotalPrice();
 
-    if (totalPrice >= 120000) {
-      return { "증정 이벤트": 25000 };
+    if (totalPrice >= EVENT_PRICE.giftMinimumPrice) {
+      return { "증정 이벤트": EVENT_PRICE.champagnePrice };
     }
   }
 
   checkChrisMasDayDiscount() {
-    if (this.#visitDate >= 1 && this.#visitDate <= 25) {
-      const christmasDayDiscountPrice = 1000 + (this.#visitDate - 1) * 100;
+    if (this.#visitDate >= CHRISTMAS_EVENT.d_dayDiscountStart && this.#visitDate <= CHRISTMAS_EVENT.d_dayDiscountEnd) {
+      const christmasDayDiscountPrice = EVENT_PRICE.chrismasDayStartPrice + (this.#visitDate - 1) * 100;
 
       return { "크리스마스 디데이 할인": christmasDayDiscountPrice };
     }
@@ -128,11 +129,11 @@ class EventPlan {
   checkDayDiscount() {
     const day = new Date(`2023-12-${this.#visitDate}`).getDay();
 
-    if (day === 5 || day === 6) {
+    if (day === CHRISTMAS_EVENT.friday || day === CHRISTMAS_EVENT.saturday) {
       return this.discountMenu("weekend");
     }
 
-    if (day >= 0 && day <= 4) {
+    if (day >= CHRISTMAS_EVENT.sunday && day <= CHRISTMAS_EVENT.thursday) {
       return this.discountMenu("weekday");
     }
   }
@@ -140,8 +141,8 @@ class EventPlan {
   checkSpecialDayDisCount() {
     const day = new Date(`2023-12-${this.#visitDate}`).getDay();
 
-    if (day === 0 || this.#visitDate === 25) {
-      return { "특별 할인": 1000 };
+    if (day === CHRISTMAS_EVENT.sunday || this.#visitDate === CHRISTMAS_EVENT.christmasDay) {
+      return { "특별 할인": EVENT_PRICE.specialEventPrice };
     }
   }
 
@@ -155,7 +156,7 @@ class EventPlan {
     });
 
     if (totalDishes !== 0) {
-      const totalDisCount = totalDishes * 2023;
+      const totalDisCount = totalDishes * EVENT_PRICE.dayDiscountPrice;
       return { [discountType]: totalDisCount };
     }
   }

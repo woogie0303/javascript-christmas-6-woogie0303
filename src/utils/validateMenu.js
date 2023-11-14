@@ -1,5 +1,6 @@
 import { ERROR } from "../Controller/Error.js";
 import { christmasMenu, menuCategory } from "../Model/EventData.js";
+import { CHRISTMAS_EVENT } from "./Constant.js";
 
 const validateMenu = {
   checkEqaulMenu(orderMenu, menuName) {
@@ -27,7 +28,7 @@ const validateMenu = {
   },
 
   checkAmountRange(menuAmount) {
-    if (Number(menuAmount) < 1) {
+    if (Number(menuAmount) < CHRISTMAS_EVENT.minimumOrderCount) {
       throw new Error(ERROR.ORDER_MENU_ERROR);
     }
   },
@@ -38,7 +39,7 @@ const validateMenu = {
       total += amount;
     });
 
-    if (total > 20) {
+    if (total > CHRISTMAS_EVENT.maximumOrderCount) {
       throw new Error(ERROR.ORDER_MENU_ERROR);
     }
   },

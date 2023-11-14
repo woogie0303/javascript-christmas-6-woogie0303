@@ -1,4 +1,5 @@
 import { ERROR } from "../Controller/Error.js";
+import { CHRISTMAS_EVENT } from "./Constant.js";
 
 const validateDate = {
   checkDateIsNum(numberInput) {
@@ -7,7 +8,7 @@ const validateDate = {
     }
   },
   checkDateRange(numberInput) {
-    if (Number(numberInput) < 1 || Number(numberInput) > 31) {
+    if (Number(numberInput) < CHRISTMAS_EVENT.start || Number(numberInput) > CHRISTMAS_EVENT.end) {
       throw new Error(ERROR.VISIT_DATE_ERROR);
     }
   },
